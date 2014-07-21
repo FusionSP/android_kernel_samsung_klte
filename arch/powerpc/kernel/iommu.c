@@ -501,7 +501,11 @@ struct iommu_table *iommu_init_table(struct iommu_table *tbl, int nid)
 	/* number of bytes needed for the bitmap */
 	sz = (tbl->it_size + 7) >> 3;
 
+<<<<<<< HEAD
 	page = alloc_pages_node(nid, GFP_ATOMIC, get_order(sz));
+=======
+	page = alloc_pages_node(nid, GFP_KERNEL, get_order(sz));
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	if (!page)
 		panic("iommu_init_table: Can't allocate %ld bytes\n", sz);
 	tbl->it_map = page_address(page);

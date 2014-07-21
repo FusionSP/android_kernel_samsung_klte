@@ -48,6 +48,10 @@
 #include <linux/unistd.h>
 #include <linux/kallsyms.h>
 #include <linux/uaccess.h>
+<<<<<<< HEAD
+=======
+#include <linux/rcupdate.h>
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #include <asm/io.h>
 #include <asm/asm-offsets.h>
@@ -69,8 +73,15 @@ void cpu_idle(void)
 
 	/* endless idle loop with no priority at all */
 	while (1) {
+<<<<<<< HEAD
 		while (!need_resched())
 			barrier();
+=======
+		rcu_idle_enter();
+		while (!need_resched())
+			barrier();
+		rcu_idle_exit();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		schedule_preempt_disabled();
 		check_pgt_cache();
 	}

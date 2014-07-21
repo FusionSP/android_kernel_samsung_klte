@@ -525,13 +525,27 @@ static int __vcpu_run(struct kvm_vcpu *vcpu)
 	if (!kvm_is_ucontrol(vcpu->kvm))
 		kvm_s390_deliver_pending_interrupts(vcpu);
 
+<<<<<<< HEAD
+=======
+	VCPU_EVENT(vcpu, 6, "entering sie flags %x",
+		   atomic_read(&vcpu->arch.sie_block->cpuflags));
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	vcpu->arch.sie_block->icptcode = 0;
 	local_irq_disable();
 	kvm_guest_enter();
 	local_irq_enable();
+<<<<<<< HEAD
 	VCPU_EVENT(vcpu, 6, "entering sie flags %x",
 		   atomic_read(&vcpu->arch.sie_block->cpuflags));
 	rc = sie64a(vcpu->arch.sie_block, vcpu->run->s.regs.gprs);
+=======
+	rc = sie64a(vcpu->arch.sie_block, vcpu->run->s.regs.gprs);
+	local_irq_disable();
+	kvm_guest_exit();
+	local_irq_enable();
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	if (rc) {
 		if (kvm_is_ucontrol(vcpu->kvm)) {
 			rc = SIE_INTERCEPT_UCONTROL;
@@ -543,9 +557,12 @@ static int __vcpu_run(struct kvm_vcpu *vcpu)
 	}
 	VCPU_EVENT(vcpu, 6, "exit sie icptcode %d",
 		   vcpu->arch.sie_block->icptcode);
+<<<<<<< HEAD
 	local_irq_disable();
 	kvm_guest_exit();
 	local_irq_enable();
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	memcpy(&vcpu->run->s.regs.gprs[14], &vcpu->arch.sie_block->gg14, 16);
 	return rc;
@@ -677,6 +694,17 @@ int kvm_s390_vcpu_store_status(struct kvm_vcpu *vcpu, unsigned long addr)
 	} else
 		prefix = 0;
 
+<<<<<<< HEAD
+=======
+	/*
+	 * The guest FPRS and ACRS are in the host FPRS/ACRS due to the lazy
+	 * copying in vcpu load/put. Lets update our copies before we save
+	 * it into the save area
+	 */
+	save_fp_regs(&vcpu->arch.guest_fpregs);
+	save_access_regs(vcpu->run->s.regs.acrs);
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	if (__guestcopy(vcpu, addr + offsetof(struct save_area, fp_regs),
 			vcpu->arch.guest_fpregs.fprs, 128, prefix))
 		return -EFAULT;
@@ -894,7 +922,11 @@ static int __init kvm_s390_init(void)
 	}
 	memcpy(facilities, S390_lowcore.stfle_fac_list, 16);
 	facilities[0] &= 0xff00fff3f47c0000ULL;
+<<<<<<< HEAD
 	facilities[1] &= 0x201c000000000000ULL;
+=======
+	facilities[1] &= 0x001c000000000000ULL;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	return 0;
 }
 

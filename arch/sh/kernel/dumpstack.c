@@ -80,7 +80,11 @@ static int print_trace_stack(void *data, char *name)
  */
 static void print_trace_address(void *data, unsigned long addr, int reliable)
 {
+<<<<<<< HEAD
 	printk(data);
+=======
+	printk("%s", (char *)data);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	printk_address(addr, reliable);
 }
 

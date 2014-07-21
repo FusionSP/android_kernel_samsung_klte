@@ -83,7 +83,15 @@ static int pseries_eeh_init(void)
 	ibm_configure_pe		= rtas_token("ibm,configure-pe");
 	ibm_configure_bridge		= rtas_token ("ibm,configure-bridge");
 
+<<<<<<< HEAD
 	/* necessary sanity check */
+=======
+	/*
+	 * Necessary sanity check. We needn't check "get-config-addr-info"
+	 * and its variant since the old firmware probably support address
+	 * of domain/bus/slot/function for EEH RTAS operations.
+	 */
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	if (ibm_set_eeh_option == RTAS_UNKNOWN_SERVICE) {
 		pr_warning("%s: RTAS service <ibm,set-eeh-option> invalid\n",
 			__func__);
@@ -102,12 +110,15 @@ static int pseries_eeh_init(void)
 		pr_warning("%s: RTAS service <ibm,slot-error-detail> invalid\n",
 			__func__);
 		return -EINVAL;
+<<<<<<< HEAD
 	} else if (ibm_get_config_addr_info2 == RTAS_UNKNOWN_SERVICE &&
 		   ibm_get_config_addr_info == RTAS_UNKNOWN_SERVICE) {
 		pr_warning("%s: RTAS service <ibm,get-config-addr-info2> and "
 			"<ibm,get-config-addr-info> invalid\n",
 			__func__);
 		return -EINVAL;
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	} else if (ibm_configure_pe == RTAS_UNKNOWN_SERVICE &&
 		   ibm_configure_bridge == RTAS_UNKNOWN_SERVICE) {
 		pr_warning("%s: RTAS service <ibm,configure-pe> and "
@@ -321,6 +332,10 @@ static int pseries_eeh_get_state(struct device_node *dn, int *state)
 			} else {
 				result = EEH_STATE_NOT_SUPPORT;
 			}
+<<<<<<< HEAD
+=======
+			break;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		default:
 			result = EEH_STATE_NOT_SUPPORT;
 		}

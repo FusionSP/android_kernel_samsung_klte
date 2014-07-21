@@ -76,7 +76,11 @@
 #endif
 
 int boot_cpuid = 0;
+<<<<<<< HEAD
 int __initdata spinning_secondaries;
+=======
+int spinning_secondaries;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 u64 ppc64_pft_size;
 
 /* Pick defaults since we might want to patch instructions

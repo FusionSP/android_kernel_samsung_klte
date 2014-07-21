@@ -29,7 +29,11 @@
 
 /* References to section boundaries */
 
+<<<<<<< HEAD
 extern char _ftext, _etext, _fdata, _edata, _rodata_end;
+=======
+extern char _stext, _etext, _sdata, _edata, _rodata_end;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 extern char __init_begin, __init_end;
 
 /*
@@ -197,8 +201,13 @@ void __init mem_init(void)
 			reservedpages++;
 	}
 
+<<<<<<< HEAD
 	codesize =  (unsigned long) &_etext - (unsigned long) &_ftext;
 	datasize =  (unsigned long) &_edata - (unsigned long) &_fdata;
+=======
+	codesize =  (unsigned long) &_etext - (unsigned long) &_stext;
+	datasize =  (unsigned long) &_edata - (unsigned long) &_sdata;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	initsize =  (unsigned long) &__init_end - (unsigned long) &__init_begin;
 
 	printk("Memory: %luk/%luk available (%ldk kernel code, %ldk reserved, "

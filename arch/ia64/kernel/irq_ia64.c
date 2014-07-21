@@ -23,7 +23,10 @@
 #include <linux/ioport.h>
 #include <linux/kernel_stat.h>
 #include <linux/ptrace.h>
+<<<<<<< HEAD
 #include <linux/random.h>	/* for rand_initialize_irq() */
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #include <linux/signal.h>
 #include <linux/smp.h>
 #include <linux/threads.h>

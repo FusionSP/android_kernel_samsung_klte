@@ -15,6 +15,11 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+<<<<<<< HEAD
+=======
+#include <sys/time.h>
+#include <sys/resource.h>
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #include <asm/unistd.h>
 #include "init.h"
 #include "os.h"

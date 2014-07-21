@@ -266,8 +266,13 @@ extern long __strnlen_user(const char __user *, long len);
 
 #define strlen_user __strlen_user
 #define strnlen_user __strnlen_user
+<<<<<<< HEAD
 #define __copy_to_user_inatomic ___copy_to_user
 #define __copy_from_user_inatomic ___copy_from_user
+=======
+#define __copy_to_user_inatomic __copy_to_user
+#define __copy_from_user_inatomic __copy_from_user
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #endif  /* __ASSEMBLY__ */
 

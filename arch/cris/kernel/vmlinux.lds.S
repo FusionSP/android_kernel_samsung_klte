@@ -52,6 +52,10 @@ SECTIONS
 
 	EXCEPTION_TABLE(4)
 
+<<<<<<< HEAD
+=======
+	_sdata = .;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	RODATA
 
 	. = ALIGN (4);

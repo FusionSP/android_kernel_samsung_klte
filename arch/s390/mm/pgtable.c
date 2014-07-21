@@ -85,7 +85,10 @@ repeat:
 		crst_table_free(mm, table);
 	if (mm->context.asce_limit < limit)
 		goto repeat;
+<<<<<<< HEAD
 	update_mm(mm, current);
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	return 0;
 }
 
@@ -93,9 +96,12 @@ void crst_table_downgrade(struct mm_struct *mm, unsigned long limit)
 {
 	pgd_t *pgd;
 
+<<<<<<< HEAD
 	if (mm->context.asce_limit <= limit)
 		return;
 	__tlb_flush_mm(mm);
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	while (mm->context.asce_limit > limit) {
 		pgd = mm->pgd;
 		switch (pgd_val(*pgd) & _REGION_ENTRY_TYPE_MASK) {
@@ -118,7 +124,10 @@ void crst_table_downgrade(struct mm_struct *mm, unsigned long limit)
 		mm->task_size = mm->context.asce_limit;
 		crst_table_free(mm, (unsigned long *) pgd);
 	}
+<<<<<<< HEAD
 	update_mm(mm, current);
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 }
 #endif
 
@@ -812,7 +821,11 @@ int s390_enable_sie(void)
 	task_lock(tsk);
 	if (!tsk->mm || atomic_read(&tsk->mm->mm_users) > 1 ||
 #ifdef CONFIG_AIO
+<<<<<<< HEAD
 	    !hlist_empty(&tsk->mm->ioctx_list) ||
+=======
+	    tsk->mm->ioctx_rtree.rnode ||
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #endif
 	    tsk->mm != tsk->active_mm) {
 		task_unlock(tsk);
@@ -831,7 +844,11 @@ int s390_enable_sie(void)
 	task_lock(tsk);
 	if (!tsk->mm || atomic_read(&tsk->mm->mm_users) > 1 ||
 #ifdef CONFIG_AIO
+<<<<<<< HEAD
 	    !hlist_empty(&tsk->mm->ioctx_list) ||
+=======
+	    tsk->mm->ioctx_rtree.rnode ||
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #endif
 	    tsk->mm != tsk->active_mm) {
 		mmput(mm);

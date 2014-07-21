@@ -30,7 +30,10 @@
 #include <mach/system.h>
 #include <mach/vreg.h>
 #include <mach/board.h>
+<<<<<<< HEAD
 #include <mach/proc_comm.h>
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #include <asm/io.h>
 #include <asm/delay.h>
@@ -41,6 +44,10 @@
 
 #include "gpio_chip.h"
 #include "board-sapphire.h"
+<<<<<<< HEAD
+=======
+#include "proc_comm.h"
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #include "devices.h"
 
 void msm_init_irq(void);

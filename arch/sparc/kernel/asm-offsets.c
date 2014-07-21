@@ -34,6 +34,11 @@ int foo(void)
 	DEFINE(AOFF_task_thread, offsetof(struct task_struct, thread));
 	BLANK();
 	DEFINE(AOFF_mm_context, offsetof(struct mm_struct, context));
+<<<<<<< HEAD
+=======
+	BLANK();
+	DEFINE(VMA_VM_MM,    offsetof(struct vm_area_struct, vm_mm));
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	/* DEFINE(NUM_USER_SEGMENTS, TASK_SIZE>>28); */
 	return 0;

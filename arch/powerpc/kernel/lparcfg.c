@@ -35,7 +35,17 @@
 #include <asm/vdso_datapage.h>
 #include <asm/vio.h>
 #include <asm/mmu.h>
+<<<<<<< HEAD
 
+=======
+#include <asm/machdep.h>
+
+
+/*
+ * This isn't a module but we expose that to userspace
+ * via /proc so leave the definitions here
+ */
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #define MODULE_VERS "1.9"
 #define MODULE_NAME "lparcfg"
 
@@ -301,6 +311,10 @@ static void parse_system_parameter_string(struct seq_file *m)
 				__pa(rtas_data_buf),
 				RTAS_DATA_BUF_SIZE);
 	memcpy(local_buffer, rtas_data_buf, SPLPAR_MAXLENGTH);
+<<<<<<< HEAD
+=======
+	local_buffer[SPLPAR_MAXLENGTH - 1] = '\0';
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	spin_unlock(&rtas_data_buf_lock);
 
 	if (call_status != 0) {
@@ -419,7 +433,12 @@ static void parse_em_data(struct seq_file *m)
 {
 	unsigned long retbuf[PLPAR_HCALL_BUFSIZE];
 
+<<<<<<< HEAD
 	if (plpar_hcall(H_GET_EM_PARMS, retbuf) == H_SUCCESS)
+=======
+	if (firmware_has_feature(FW_FEATURE_LPAR) &&
+	    plpar_hcall(H_GET_EM_PARMS, retbuf) == H_SUCCESS)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		seq_printf(m, "power_mode_data=%016lx\n", retbuf[0]);
 }
 
@@ -678,7 +697,10 @@ static int lparcfg_open(struct inode *inode, struct file *file)
 }
 
 static const struct file_operations lparcfg_fops = {
+<<<<<<< HEAD
 	.owner		= THIS_MODULE,
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	.read		= seq_read,
 	.write		= lparcfg_write,
 	.open		= lparcfg_open,
@@ -704,6 +726,7 @@ static int __init lparcfg_init(void)
 	proc_ppc64_lparcfg = ent;
 	return 0;
 }
+<<<<<<< HEAD
 
 static void __exit lparcfg_cleanup(void)
 {
@@ -716,3 +739,6 @@ module_exit(lparcfg_cleanup);
 MODULE_DESCRIPTION("Interface for LPAR configuration data");
 MODULE_AUTHOR("Dave Engebretsen");
 MODULE_LICENSE("GPL");
+=======
+machine_device_initcall(pseries, lparcfg_init);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99

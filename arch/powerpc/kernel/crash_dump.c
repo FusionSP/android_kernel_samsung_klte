@@ -108,17 +108,31 @@ ssize_t copy_oldmem_page(unsigned long pfn, char *buf,
 			size_t csize, unsigned long offset, int userbuf)
 {
 	void  *vaddr;
+<<<<<<< HEAD
+=======
+	phys_addr_t paddr;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	if (!csize)
 		return 0;
 
 	csize = min_t(size_t, csize, PAGE_SIZE);
+<<<<<<< HEAD
 
 	if ((min_low_pfn < pfn) && (pfn < max_pfn)) {
 		vaddr = __va(pfn << PAGE_SHIFT);
 		csize = copy_oldmem_vaddr(vaddr, buf, csize, offset, userbuf);
 	} else {
 		vaddr = __ioremap(pfn << PAGE_SHIFT, PAGE_SIZE, 0);
+=======
+	paddr = pfn << PAGE_SHIFT;
+
+	if (memblock_is_region_memory(paddr, csize)) {
+		vaddr = __va(paddr);
+		csize = copy_oldmem_vaddr(vaddr, buf, csize, offset, userbuf);
+	} else {
+		vaddr = __ioremap(paddr, PAGE_SIZE, 0);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		csize = copy_oldmem_vaddr(vaddr, buf, csize, offset, userbuf);
 		iounmap(vaddr);
 	}

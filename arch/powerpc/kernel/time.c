@@ -212,8 +212,11 @@ static u64 scan_dispatch_log(u64 stop_tb)
 	if (i == vpa->dtl_idx)
 		return 0;
 	while (i < vpa->dtl_idx) {
+<<<<<<< HEAD
 		if (dtl_consumer)
 			dtl_consumer(dtl, i);
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		dtb = dtl->timebase;
 		tb_delta = dtl->enqueue_to_dispatch_time +
 			dtl->ready_to_enqueue_time;
@@ -226,6 +229,11 @@ static u64 scan_dispatch_log(u64 stop_tb)
 		}
 		if (dtb > stop_tb)
 			break;
+<<<<<<< HEAD
+=======
+		if (dtl_consumer)
+			dtl_consumer(dtl, i);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		stolen += tb_delta;
 		++i;
 		++dtl;
@@ -495,7 +503,11 @@ void timer_interrupt(struct pt_regs * regs)
 
 	__get_cpu_var(irq_stat).timer_irqs++;
 
+<<<<<<< HEAD
 #if defined(CONFIG_PPC32) && defined(CONFIG_PMAC)
+=======
+#if defined(CONFIG_PPC32) && defined(CONFIG_PPC_PMAC)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	if (atomic_read(&ppc_n_lost_interrupts) != 0)
 		do_IRQ(regs);
 #endif
@@ -741,6 +753,7 @@ void update_vsyscall(struct timespec *wall_time, struct timespec *wtm,
 
 void update_vsyscall_tz(void)
 {
+<<<<<<< HEAD
 	/* Make userspace gettimeofday spin until we're done. */
 	++vdso_data->tb_update_count;
 	smp_mb();
@@ -748,6 +761,10 @@ void update_vsyscall_tz(void)
 	vdso_data->tz_dsttime = sys_tz.tz_dsttime;
 	smp_mb();
 	++vdso_data->tb_update_count;
+=======
+	vdso_data->tz_minuteswest = sys_tz.tz_minuteswest;
+	vdso_data->tz_dsttime = sys_tz.tz_dsttime;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 }
 
 static void __init clocksource_init(void)

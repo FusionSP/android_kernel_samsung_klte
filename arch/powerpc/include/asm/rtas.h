@@ -262,6 +262,11 @@ extern void rtas_progress(char *s, unsigned short hex);
 extern void rtas_initialize(void);
 extern int rtas_suspend_cpu(struct rtas_suspend_me_data *data);
 extern int rtas_suspend_last_cpu(struct rtas_suspend_me_data *data);
+<<<<<<< HEAD
+=======
+extern int rtas_online_cpus_mask(cpumask_var_t cpus);
+extern int rtas_offline_cpus_mask(cpumask_var_t cpus);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 extern int rtas_ibm_suspend_me(struct rtas_args *);
 
 struct rtc_time;

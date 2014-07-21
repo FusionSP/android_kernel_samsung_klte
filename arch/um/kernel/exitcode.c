@@ -40,9 +40,17 @@ static ssize_t exitcode_proc_write(struct file *file,
 		const char __user *buffer, size_t count, loff_t *pos)
 {
 	char *end, buf[sizeof("nnnnn\0")];
+<<<<<<< HEAD
 	int tmp;
 
 	if (copy_from_user(buf, buffer, count))
+=======
+	size_t size;
+	int tmp;
+
+	size = min(count, sizeof(buf));
+	if (copy_from_user(buf, buffer, size))
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		return -EFAULT;
 
 	tmp = simple_strtol(buf, &end, 0);

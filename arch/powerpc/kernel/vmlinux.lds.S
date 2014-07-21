@@ -38,9 +38,12 @@ jiffies = jiffies_64 + 4;
 #endif
 SECTIONS
 {
+<<<<<<< HEAD
 	. = 0;
 	reloc_start = .;
 
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	. = KERNELBASE;
 
 /*

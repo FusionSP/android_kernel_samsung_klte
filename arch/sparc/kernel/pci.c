@@ -486,8 +486,13 @@ static void __devinit apb_fake_ranges(struct pci_dev *dev,
 	apb_calc_first_last(map, &first, &last);
 	res = bus->resource[1];
 	res->flags = IORESOURCE_MEM;
+<<<<<<< HEAD
 	region.start = (first << 21);
 	region.end = (last << 21) + ((1 << 21) - 1);
+=======
+	region.start = (first << 29);
+	region.end = (last << 29) + ((1 << 29) - 1);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	pcibios_bus_to_resource(dev, res, &region);
 }
 

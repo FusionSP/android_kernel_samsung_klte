@@ -131,7 +131,10 @@ startup_continue:
 	clr		%l5
 	sethi		%hi(num_kernel_image_mappings), %l6
 	lduw		[%l6 + %lo(num_kernel_image_mappings)], %l6
+<<<<<<< HEAD
 	add		%l6, 1, %l6
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	mov		15, %l7
 	BRANCH_IF_ANY_CHEETAH(g1,g5,2f)
@@ -224,7 +227,10 @@ niagara_lock_tlb:
 	clr		%l5
 	sethi		%hi(num_kernel_image_mappings), %l6
 	lduw		[%l6 + %lo(num_kernel_image_mappings)], %l6
+<<<<<<< HEAD
 	add		%l6, 1, %l6
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 1:
 	mov		HV_FAST_MMU_MAP_PERM_ADDR, %o5

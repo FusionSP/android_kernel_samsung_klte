@@ -201,7 +201,11 @@ int __node_distance(int a, int b)
 	int distance = LOCAL_DISTANCE;
 
 	if (!form1_affinity)
+<<<<<<< HEAD
 		return distance;
+=======
+		return ((a == b) ? LOCAL_DISTANCE : REMOTE_DISTANCE);
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	for (i = 0; i < distance_ref_points_depth; i++) {
 		if (distance_lookup_table[a][i] == distance_lookup_table[b][i])
@@ -639,7 +643,11 @@ static void __init parse_drconf_memory(struct device_node *memory)
 	unsigned int n, rc, ranges, is_kexec_kdump = 0;
 	unsigned long lmb_size, base, size, sz;
 	int nid;
+<<<<<<< HEAD
 	struct assoc_arrays aa;
+=======
+	struct assoc_arrays aa = { .arrays = NULL };
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	n = of_get_drconf_memory(memory, &dm);
 	if (!n)

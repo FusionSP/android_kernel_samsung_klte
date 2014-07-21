@@ -1341,11 +1341,23 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 	const char *cp;
 
 	dn = dev->of_node;
+<<<<<<< HEAD
 	if (!dn)
 		return -ENODEV;
 	cp = of_get_property(dn, "compatible", NULL);
 	if (!cp)
 		return -ENODEV;
+=======
+	if (!dn) {
+		strcpy(buf, "\n");
+		return strlen(buf);
+	}
+	cp = of_get_property(dn, "compatible", NULL);
+	if (!cp) {
+		strcpy(buf, "\n");
+		return strlen(buf);
+	}
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	return sprintf(buf, "vio:T%sS%s\n", vio_dev->type, cp);
 }

@@ -36,6 +36,10 @@
 #define OP_TRAP_64 2
 
 #define OP_31_XOP_LWZX      23
+<<<<<<< HEAD
+=======
+#define OP_31_XOP_DCBF      86
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #define OP_31_XOP_LBZX      87
 #define OP_31_XOP_STWX      151
 #define OP_31_XOP_STBX      215
@@ -373,6 +377,10 @@ int kvmppc_emulate_instruction(struct kvm_run *run, struct kvm_vcpu *vcpu)
 			kvmppc_set_exit_type(vcpu, EMULATED_MTSPR_EXITS);
 			break;
 
+<<<<<<< HEAD
+=======
+		case OP_31_XOP_DCBF:
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		case OP_31_XOP_DCBI:
 			/* Do nothing. The guest is performing dcbi because
 			 * hardware DMA is not snooped by the dcache, but

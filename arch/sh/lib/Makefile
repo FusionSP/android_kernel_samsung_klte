@@ -6,7 +6,11 @@ lib-y  = delay.o memmove.o memchr.o \
 	 checksum.o strlen.o div64.o div64-generic.o
 
 # Extracted from libgcc
+<<<<<<< HEAD
 lib-y += movmem.o ashldi3.o ashrdi3.o lshrdi3.o \
+=======
+obj-y += movmem.o ashldi3.o ashrdi3.o lshrdi3.o \
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	 ashlsi3.o ashrsi3.o ashiftrt.o lshrsi3.o \
 	 udiv_qrnnd.o
 

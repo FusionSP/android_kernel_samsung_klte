@@ -106,16 +106,27 @@ futex_atomic_cmpxchg_inatomic(u32 *uval, u32 __user *uaddr,
 		return -EFAULT;
 
 	{
+<<<<<<< HEAD
 		register unsigned long r8 __asm ("r8");
 		unsigned long prev;
 		__asm__ __volatile__(
 			"	mf;;					\n"
 			"	mov %0=r0				\n"
+=======
+		register unsigned long r8 __asm ("r8") = 0;
+		unsigned long prev;
+		__asm__ __volatile__(
+			"	mf;;					\n"
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 			"	mov ar.ccv=%4;;				\n"
 			"[1:]	cmpxchg4.acq %1=[%2],%3,ar.ccv		\n"
 			"	.xdata4 \"__ex_table\", 1b-., 2f-.	\n"
 			"[2:]"
+<<<<<<< HEAD
 			: "=r" (r8), "=r" (prev)
+=======
+			: "+r" (r8), "=&r" (prev)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 			: "r" (uaddr), "r" (newval),
 			  "rO" ((long) (unsigned) oldval)
 			: "memory");

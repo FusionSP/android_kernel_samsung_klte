@@ -14,13 +14,22 @@
 #include <asm/io.h>
 
 #include <mach/vreg.h>
+<<<<<<< HEAD
 #include <mach/proc_comm.h>
+=======
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #include <mach/mmc.h>
 
 #include "devices.h"
 
 #include "board-trout.h"
 
+<<<<<<< HEAD
+=======
+#include "proc_comm.h"
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #define DEBUG_SDSLOT_VDD 1
 
 /* ---- COMMON ---- */

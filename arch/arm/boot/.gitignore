@@ -4,4 +4,7 @@ xipImage
 bootpImage
 uImage
 *.dtb
+<<<<<<< HEAD
 zImage-dtb
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99

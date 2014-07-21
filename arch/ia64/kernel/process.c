@@ -29,6 +29,10 @@
 #include <linux/kdebug.h>
 #include <linux/utsname.h>
 #include <linux/tracehook.h>
+<<<<<<< HEAD
+=======
+#include <linux/rcupdate.h>
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #include <asm/cpu.h>
 #include <asm/delay.h>
@@ -301,6 +305,10 @@ cpu_idle (void)
 
 	/* endless idle loop with no priority at all */
 	while (1) {
+<<<<<<< HEAD
+=======
+		rcu_idle_enter();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		if (can_do_pal_halt) {
 			current_thread_info()->status &= ~TS_POLLING;
 			/*
@@ -331,6 +339,10 @@ cpu_idle (void)
 			normal_xtp();
 #endif
 		}
+<<<<<<< HEAD
+=======
+		rcu_idle_exit();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		schedule_preempt_disabled();
 		check_pgt_cache();
 		if (cpu_is_offline(cpu))

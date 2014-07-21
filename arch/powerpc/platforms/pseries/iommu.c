@@ -106,7 +106,11 @@ static int tce_build_pSeries(struct iommu_table *tbl, long index,
 		tcep++;
 	}
 
+<<<<<<< HEAD
 	if (tbl->it_type == TCE_PCI_SWINV_CREATE)
+=======
+	if (tbl->it_type & TCE_PCI_SWINV_CREATE)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		tce_invalidate_pSeries_sw(tbl, tces, tcep - 1);
 	return 0;
 }
@@ -121,7 +125,11 @@ static void tce_free_pSeries(struct iommu_table *tbl, long index, long npages)
 	while (npages--)
 		*(tcep++) = 0;
 
+<<<<<<< HEAD
 	if (tbl->it_type == TCE_PCI_SWINV_FREE)
+=======
+	if (tbl->it_type & TCE_PCI_SWINV_FREE)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		tce_invalidate_pSeries_sw(tbl, tces, tcep - 1);
 }
 

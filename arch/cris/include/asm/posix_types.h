@@ -33,4 +33,9 @@ typedef int		__kernel_ptrdiff_t;
 typedef unsigned short	__kernel_old_dev_t;
 #define __kernel_old_dev_t __kernel_old_dev_t
 
+<<<<<<< HEAD
+=======
+#include <asm-generic/posix_types.h>
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #endif /* __ARCH_CRIS_POSIX_TYPES_H */
