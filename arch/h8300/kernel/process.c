@@ -36,6 +36,10 @@
 #include <linux/reboot.h>
 #include <linux/fs.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
+=======
+#include <linux/rcupdate.h>
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #include <asm/uaccess.h>
 #include <asm/traps.h>
@@ -78,8 +82,15 @@ void (*idle)(void) = default_idle;
 void cpu_idle(void)
 {
 	while (1) {
+<<<<<<< HEAD
 		while (!need_resched())
 			idle();
+=======
+		rcu_idle_enter();
+		while (!need_resched())
+			idle();
+		rcu_idle_exit();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		schedule_preempt_disabled();
 	}
 }

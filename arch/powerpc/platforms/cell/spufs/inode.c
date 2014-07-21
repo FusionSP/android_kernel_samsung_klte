@@ -99,6 +99,10 @@ spufs_new_inode(struct super_block *sb, umode_t mode)
 	if (!inode)
 		goto out;
 
+<<<<<<< HEAD
+=======
+	inode->i_ino = get_next_ino();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	inode->i_mode = mode;
 	inode->i_uid = current_fsuid();
 	inode->i_gid = current_fsgid();

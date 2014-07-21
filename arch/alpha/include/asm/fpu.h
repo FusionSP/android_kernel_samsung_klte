@@ -1,7 +1,13 @@
 #ifndef __ASM_ALPHA_FPU_H
 #define __ASM_ALPHA_FPU_H
 
+<<<<<<< HEAD
 #include <asm/special_insns.h>
+=======
+#ifdef __KERNEL__
+#include <asm/special_insns.h>
+#endif
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 /*
  * Alpha floating-point control register defines:

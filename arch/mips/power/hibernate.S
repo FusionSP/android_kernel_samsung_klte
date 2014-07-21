@@ -44,6 +44,10 @@ LEAF(swsusp_arch_resume)
 	bne t1, t3, 1b
 	PTR_L t0, PBE_NEXT(t0)
 	bnez t0, 0b
+<<<<<<< HEAD
+=======
+	jal local_flush_tlb_all /* Avoid TLB mismatch after kernel resume */
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	PTR_LA t0, saved_regs
 	PTR_L ra, PT_R31(t0)
 	PTR_L sp, PT_R29(t0)

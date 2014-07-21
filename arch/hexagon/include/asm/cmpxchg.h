@@ -1,7 +1,11 @@
 /*
  * xchg/cmpxchg operations for the Hexagon architecture
  *
+<<<<<<< HEAD
  * Copyright (c) 2010-2011, The Linux Foundation. All rights reserved.
+=======
+ * Copyright (c) 2010-2011, Code Aurora Forum. All rights reserved.
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
  *
  *
  * This program is free software; you can redistribute it and/or modify

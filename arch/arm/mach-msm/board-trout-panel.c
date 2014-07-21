@@ -16,9 +16,15 @@
 
 #include <mach/msm_fb.h>
 #include <mach/vreg.h>
+<<<<<<< HEAD
 #include <mach/proc_comm.h>
 
 #include "board-trout.h"
+=======
+
+#include "board-trout.h"
+#include "proc_comm.h"
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #include "devices.h"
 
 #define TROUT_DEFAULT_BACKLIGHT_BRIGHTNESS 255

@@ -57,7 +57,11 @@ config GENERIC_CLOCKEVENTS
 	def_bool y
 
 config GENERIC_GPIO
+<<<<<<< HEAD
 	def_bool y
+=======
+	bool
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 config GENERIC_CSUM
 	def_bool y

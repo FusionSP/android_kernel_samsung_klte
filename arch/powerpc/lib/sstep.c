@@ -1395,7 +1395,11 @@ int __kprobes emulate_step(struct pt_regs *regs, unsigned int instr)
 				regs->gpr[rd] = byterev_4(val);
 			goto ldst_done;
 
+<<<<<<< HEAD
 #ifdef CONFIG_PPC_CPU
+=======
+#ifdef CONFIG_PPC_FPU
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		case 535:	/* lfsx */
 		case 567:	/* lfsux */
 			if (!(regs->msr & MSR_FP))

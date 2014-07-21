@@ -788,6 +788,12 @@ static void remove_cache_dir(struct cache_dir *cache_dir)
 {
 	remove_index_dirs(cache_dir);
 
+<<<<<<< HEAD
+=======
+	/* Remove cache dir from sysfs */
+	kobject_del(cache_dir->kobj);
+
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	kobject_put(cache_dir->kobj);
 
 	kfree(cache_dir);

@@ -393,11 +393,22 @@ static int kvmppc_mmu_book3s_64_hv_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 		slb_v = vcpu->kvm->arch.vrma_slb_v;
 	}
 
+<<<<<<< HEAD
 	/* Find the HPTE in the hash table */
 	index = kvmppc_hv_find_lock_hpte(kvm, eaddr, slb_v,
 					 HPTE_V_VALID | HPTE_V_ABSENT);
 	if (index < 0)
 		return -ENOENT;
+=======
+	preempt_disable();
+	/* Find the HPTE in the hash table */
+	index = kvmppc_hv_find_lock_hpte(kvm, eaddr, slb_v,
+					 HPTE_V_VALID | HPTE_V_ABSENT);
+	if (index < 0) {
+		preempt_enable();
+		return -ENOENT;
+	}
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	hptep = (unsigned long *)(kvm->arch.hpt_virt + (index << 4));
 	v = hptep[0] & ~HPTE_V_HVLOCK;
 	gr = kvm->arch.revmap[index].guest_rpte;
@@ -405,6 +416,10 @@ static int kvmppc_mmu_book3s_64_hv_xlate(struct kvm_vcpu *vcpu, gva_t eaddr,
 	/* Unlock the HPTE */
 	asm volatile("lwsync" : : : "memory");
 	hptep[0] = v;
+<<<<<<< HEAD
+=======
+	preempt_enable();
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 	gpte->eaddr = eaddr;
 	gpte->vpage = ((v & HPTE_V_AVPN) << 4) | ((eaddr >> 12) & 0xfff);

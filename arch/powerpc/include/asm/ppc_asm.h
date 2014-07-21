@@ -294,11 +294,23 @@ n:
  *      ld	rY,ADDROFF(name)(rX)
  */
 #ifdef __powerpc64__
+<<<<<<< HEAD
+=======
+#ifdef HAVE_AS_ATHIGH
+#define __AS_ATHIGH high
+#else
+#define __AS_ATHIGH h
+#endif
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #define LOAD_REG_IMMEDIATE(reg,expr)		\
 	lis     (reg),(expr)@highest;		\
 	ori     (reg),(reg),(expr)@higher;	\
 	rldicr  (reg),(reg),32,31;		\
+<<<<<<< HEAD
 	oris    (reg),(reg),(expr)@h;		\
+=======
+	oris    (reg),(reg),(expr)@__AS_ATHIGH;	\
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	ori     (reg),(reg),(expr)@l;
 
 #define LOAD_REG_ADDR(reg,name)			\

@@ -17,8 +17,13 @@
 #include <asm/intrinsics.h>
 
 
+<<<<<<< HEAD
 #define ATOMIC_INIT(i)		((atomic_t) { (i) })
 #define ATOMIC64_INIT(i)	((atomic64_t) { (i) })
+=======
+#define ATOMIC_INIT(i)		{ (i) }
+#define ATOMIC64_INIT(i)	{ (i) }
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
 #define atomic_read(v)		(*(volatile int *)&(v)->counter)
 #define atomic64_read(v)	(*(volatile long *)&(v)->counter)

@@ -83,7 +83,10 @@ SECTIONS
 
   _text = .;
   _stext = .;
+<<<<<<< HEAD
   _ftext = .;
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
   .text :
   {
@@ -112,7 +115,11 @@ SECTIONS
   EXCEPTION_TABLE(16)
   /* Data section */
 
+<<<<<<< HEAD
   _fdata = .;
+=======
+  _sdata = .;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
   RW_DATA_SECTION(XCHAL_ICACHE_LINESIZE, PAGE_SIZE, THREAD_SIZE)
   _edata = .;
 

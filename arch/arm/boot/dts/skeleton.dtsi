@@ -9,10 +9,14 @@
 	#size-cells = <1>;
 	chosen { };
 	aliases { };
+<<<<<<< HEAD
 	memory {
 		#address-cells = <1>;
 		#size-cells = <1>;
 		device_type = "memory";
 		reg = <0 0>;
 	};
+=======
+	memory { device_type = "memory"; reg = <0 0>; };
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 };

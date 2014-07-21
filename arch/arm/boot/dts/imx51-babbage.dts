@@ -29,8 +29,13 @@
 		aips@70000000 { /* aips-1 */
 			spba@70000000 {
 				esdhc@70004000 { /* ESDHC1 */
+<<<<<<< HEAD
 					fsl,cd-internal;
 					fsl,wp-internal;
+=======
+					fsl,cd-controller;
+					fsl,wp-controller;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 					status = "okay";
 				};
 

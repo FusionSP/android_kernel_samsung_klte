@@ -343,7 +343,11 @@ static int setup_frame(int sig, struct k_sigaction *ka, siginfo_t *info,
 
 	sp = regs->areg[1];
 
+<<<<<<< HEAD
 	if ((ka->sa.sa_flags & SA_ONSTACK) != 0 && ! on_sig_stack(sp)) {
+=======
+	if ((ka->sa.sa_flags & SA_ONSTACK) != 0 && sas_ss_flags(sp) == 0) {
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 		sp = current->sas_ss_sp + current->sas_ss_size;
 	}
 

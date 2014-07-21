@@ -18,8 +18,12 @@ do {						\
 	 * and 2 stores in this critical code path.  -DaveM
 	 */
 #define switch_to(prev, next, last)					\
+<<<<<<< HEAD
 do {	flush_tlb_pending();						\
 	save_and_clear_fpu();						\
+=======
+do {	save_and_clear_fpu();						\
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	/* If you are tempted to conditionalize the following */	\
 	/* so that ASI is only written if it changes, think again. */	\
 	__asm__ __volatile__("wr %%g0, %0, %%asi"			\

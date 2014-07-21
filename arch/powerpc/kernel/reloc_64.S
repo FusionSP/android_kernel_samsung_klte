@@ -81,6 +81,10 @@ _GLOBAL(relocate)
 
 6:	blr
 
+<<<<<<< HEAD
+=======
+.balign 8
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 p_dyn:	.llong	__dynamic_start - 0b
 p_rela:	.llong	__rela_dyn_start - 0b
 p_st:	.llong	_stext - 0b

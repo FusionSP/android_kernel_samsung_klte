@@ -24,6 +24,10 @@ config MIPS
 	select HAVE_GENERIC_HARDIRQS
 	select GENERIC_IRQ_PROBE
 	select GENERIC_IRQ_SHOW
+<<<<<<< HEAD
+=======
+	select GENERIC_PCI_IOMAP
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	select HAVE_ARCH_JUMP_LABEL
 	select IRQ_FORCED_THREADING
 	select HAVE_MEMBLOCK
@@ -2356,7 +2360,10 @@ config PCI
 	bool "Support for PCI controller"
 	depends on HW_HAS_PCI
 	select PCI_DOMAINS
+<<<<<<< HEAD
 	select GENERIC_PCI_IOMAP
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	select NO_GENERIC_PCI_IOPORT_MAP
 	help
 	  Find out whether you have a PCI motherboard. PCI is the name of a

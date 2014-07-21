@@ -21,8 +21,11 @@
 
 #define THREAD_SIZE		8192
 
+<<<<<<< HEAD
 #define __HAVE_ARCH_TASK_STRUCT_ALLOCATOR
 
+=======
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 /*
  * low level task data that entry.S needs immediate access to
  * - this struct should fit entirely inside of one cache line

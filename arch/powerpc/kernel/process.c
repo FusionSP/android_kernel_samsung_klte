@@ -799,6 +799,7 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 #endif /* CONFIG_PPC_STD_MMU_64 */
 #ifdef CONFIG_PPC64 
 	if (cpu_has_feature(CPU_FTR_DSCR)) {
+<<<<<<< HEAD
 		if (current->thread.dscr_inherit) {
 			p->thread.dscr_inherit = 1;
 			p->thread.dscr = current->thread.dscr;
@@ -809,6 +810,10 @@ int copy_thread(unsigned long clone_flags, unsigned long usp,
 			p->thread.dscr_inherit = 0;
 			p->thread.dscr = 0;
 		}
+=======
+		p->thread.dscr_inherit = current->thread.dscr_inherit;
+		p->thread.dscr = current->thread.dscr;
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	}
 #endif
 
@@ -1226,7 +1231,11 @@ EXPORT_SYMBOL(dump_stack);
 
 #ifdef CONFIG_PPC64
 /* Called with hard IRQs off */
+<<<<<<< HEAD
 void __ppc64_runlatch_on(void)
+=======
+void notrace __ppc64_runlatch_on(void)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 {
 	struct thread_info *ti = current_thread_info();
 	unsigned long ctrl;
@@ -1239,7 +1248,11 @@ void __ppc64_runlatch_on(void)
 }
 
 /* Called with hard IRQs off */
+<<<<<<< HEAD
 void __ppc64_runlatch_off(void)
+=======
+void notrace __ppc64_runlatch_off(void)
+>>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 {
 	struct thread_info *ti = current_thread_info();
 	unsigned long ctrl;
