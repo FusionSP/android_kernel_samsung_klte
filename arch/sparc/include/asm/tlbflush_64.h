@@ -11,30 +11,12 @@
 struct tlb_batch {
 	struct mm_struct *mm;
 	unsigned long tlb_nr;
-<<<<<<< HEAD
-=======
 	unsigned long active;
->>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 	unsigned long vaddrs[TLB_BATCH_NR];
 };
 
 extern void flush_tsb_kernel_range(unsigned long start, unsigned long end);
 extern void flush_tsb_user(struct tlb_batch *tb);
-<<<<<<< HEAD
-
-/* TLB flush operations. */
-
-extern void flush_tlb_pending(void);
-
-#define flush_tlb_range(vma,start,end)	\
-	do { (void)(start); flush_tlb_pending(); } while (0)
-#define flush_tlb_page(vma,addr)	flush_tlb_pending()
-#define flush_tlb_mm(mm)		flush_tlb_pending()
-
-/* Local cpu only.  */
-extern void __flush_tlb_all(void);
-
-=======
 extern void flush_tsb_user_page(struct mm_struct *mm, unsigned long vaddr);
 
 /* TLB flush operations. */
@@ -53,6 +35,8 @@ static inline void flush_tlb_range(struct vm_area_struct *vma,
 {
 }
 
+void flush_tlb_kernel_range(unsigned long start, unsigned long end);
+
 #define __HAVE_ARCH_ENTER_LAZY_MMU_MODE
 
 extern void flush_tlb_pending(void);
@@ -63,21 +47,10 @@ extern void arch_leave_lazy_mmu_mode(void);
 /* Local cpu only.  */
 extern void __flush_tlb_all(void);
 extern void __flush_tlb_page(unsigned long context, unsigned long vaddr);
->>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 extern void __flush_tlb_kernel_range(unsigned long start, unsigned long end);
 
 #ifndef CONFIG_SMP
 
-#define flush_tlb_kernel_range(start,end) \
-do {	flush_tsb_kernel_range(start,end); \
-	__flush_tlb_kernel_range(start,end); \
-} while (0)
-
-<<<<<<< HEAD
-#else /* CONFIG_SMP */
-
-extern void smp_flush_tlb_kernel_range(unsigned long start, unsigned long end);
-=======
 static inline void global_flush_tlb_page(struct mm_struct *mm, unsigned long vaddr)
 {
 	__flush_tlb_page(CTX_HWBITS(mm->context), vaddr);
@@ -87,19 +60,10 @@ static inline void global_flush_tlb_page(struct mm_struct *mm, unsigned long vad
 
 extern void smp_flush_tlb_kernel_range(unsigned long start, unsigned long end);
 extern void smp_flush_tlb_page(struct mm_struct *mm, unsigned long vaddr);
->>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 
-#define flush_tlb_kernel_range(start, end) \
-do {	flush_tsb_kernel_range(start,end); \
-	smp_flush_tlb_kernel_range(start, end); \
-} while (0)
-
-<<<<<<< HEAD
-=======
 #define global_flush_tlb_page(mm, vaddr) \
 	smp_flush_tlb_page(mm, vaddr)
 
->>>>>>> 21358d2... Linux 3.4.0-> 3.4.99
 #endif /* ! CONFIG_SMP */
 
 #endif /* _SPARC64_TLBFLUSH_H */
