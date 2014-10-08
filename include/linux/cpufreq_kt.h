@@ -1,7 +1,7 @@
 #include <linux/cpufreq.h>
 #include <linux/cpu.h>
 
-extern bool ktoonservative_is_active;
+extern bool fusiondemand_is_active;
 extern bool call_in_progress;
 
 extern unsigned int vfreq_lock;
@@ -10,10 +10,10 @@ extern unsigned int vfreq_lock;
 extern unsigned int cur_gpu_step;
 extern unsigned int cur_max_pwrlevel;
 
-extern void ktoonservative_screen_is_on(bool state);
+extern void fusiondemand_screen_is_on(bool state);
 extern void trigger_open_close(bool is_on);
 extern void trigger_open_close_touchkey(bool is_on);
-extern void ktoonservative_boostpulse(bool boost_for_button);
+extern void fusiondemand_boostpulse(bool boost_for_button);
 
 extern unsigned int isenable_oc;
 extern unsigned int isBooted;

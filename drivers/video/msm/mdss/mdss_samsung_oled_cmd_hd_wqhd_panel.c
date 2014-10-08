@@ -2234,8 +2234,8 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 	struct mdss_panel_info *pinfo = &msd.pdata->panel_info;
 
 	set_screen_on_off_mhz(true);
-	if (ktoonservative_is_active)
-		ktoonservative_screen_is_on(true);
+	if (fusiondemand_is_active)
+		fusiondemand_screen_is_on(true);
 	trigger_open_close(true);
 	trigger_open_close_touchkey(true);
 	
@@ -2391,8 +2391,8 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 	struct mdss_panel_info *pinfo = &msd.pdata->panel_info;
 
 	set_screen_on_off_mhz(false);
-	if (ktoonservative_is_active)
-		ktoonservative_screen_is_on(false);
+	if (fusiondemand_is_active)
+		fusiondemand_screen_is_on(false);
 	trigger_open_close(false);
 	trigger_open_close_touchkey(false);
 	

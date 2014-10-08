@@ -1,5 +1,5 @@
 /*
- *  drivers/cpufreq/cpufreq_ktoonservative.c
+ *  drivers/cpufreq/cpufreq_fusiondemand.c
  *
  *  Copyright (C)  2001 Russell King
  *            (C)  2003 Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>.
@@ -36,7 +36,7 @@
 #define DEF_DISABLE_hotplug			(0)
 #define CPUS_AVAILABLE				num_possible_cpus()
 
-bool ktoonservative_is_active = false;
+bool fusiondemand_is_active = false;
 static int hotplug_cpu_enable_up[] = { 0, 58, 68, 78 };
 static int hotplug_cpu_enable_down[] = { 0, 35, 45, 55 };
 static int hotplug_cpu_single_up[] = { 0, 0, 0, 0 };
@@ -393,7 +393,7 @@ static ssize_t show_sync_extra_cores_screen_off(struct kobject *kobj,
 	return sprintf(buf, "%u\n", dbs_tuners_ins.sync_extra_cores_screen_off);
 }
 
-/* cpufreq_ktoonservative Governor Tunables */
+/* cpufreq_fusiondemand Governor Tunables */
 #define show_one(file_name, object)					\
 static ssize_t show_##file_name						\
 (struct kobject *kobj, struct attribute *attr, char *buf)		\
@@ -1631,7 +1631,7 @@ static struct attribute *dbs_attributes[] = {
 
 static struct attribute_group dbs_attr_group = {
 	.attrs = dbs_attributes,
-	.name = "ktoonservativeq",
+	.name = "fusiondemand",
 };
 
 /************************** sysfs end ************************/
@@ -1945,7 +1945,7 @@ void check_boost_cores_up(bool dec1, bool dec2, bool dec3)
 	}
 }
 
-void ktoonservative_screen_is_on(bool state)
+void fusiondemand_screen_is_on(bool state)
 {
 	unsigned int need_to_queue = 0;
 	unsigned int cpu;
@@ -1975,7 +1975,7 @@ void ktoonservative_screen_is_on(bool state)
 			
 		if (stored_sampling_rate > 0)
 			dbs_tuners_ins.sampling_rate = stored_sampling_rate; //max(input, min_sampling_rate);
-		ktoonservative_boostpulse(true);
+		fusiondemand_boostpulse(true);
 	}
 	else
 	{
@@ -2028,7 +2028,7 @@ void ktoonservative_screen_is_on(bool state)
 	
 }
 
-void ktoonservative_boostpulse(bool boost_for_button)
+void fusiondemand_boostpulse(bool boost_for_button)
 {
 	if (!boostpulse_relayf)
 	{
@@ -2157,7 +2157,7 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 
 	switch (event) {
 	case CPUFREQ_GOV_START:
-		ktoonservative_is_active = true;
+		fusiondemand_is_active = true;
 		
 		prev_apenable = apget_enable_auto_hotplug();
 		apenable_auto_hotplug(false);
@@ -2222,7 +2222,7 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 		break;
 
 	case CPUFREQ_GOV_STOP:
-		ktoonservative_is_active = false;
+		fusiondemand_is_active = false;
 		
 		apenable_auto_hotplug(prev_apenable);
 		
@@ -2271,11 +2271,11 @@ static int cpufreq_governor_dbs(struct cpufreq_policy *policy,
 	return 0;
 }
 
-#ifndef CONFIG_CPU_FREQ_DEFAULT_GOV_KTOONSERVATIVEQ
+#ifndef CONFIG_CPU_FREQ_DEFAULT_GOV_FUSIONDEMAND
 static
 #endif
-struct cpufreq_governor cpufreq_gov_ktoonservative = {
-	.name			= "ktoonservativeq",
+struct cpufreq_governor cpufreq_gov_fusiondemand = {
+	.name			= "fusiondemand",
 	.governor		= cpufreq_governor_dbs,
 	.max_transition_latency	= TRANSITION_LATENCY_LIMIT,
 	.owner			= THIS_MODULE,
@@ -2283,31 +2283,31 @@ struct cpufreq_governor cpufreq_gov_ktoonservative = {
 
 static int __init cpufreq_gov_dbs_init(void)
 {
-	dbs_wq = alloc_workqueue("ktoonservativeq_dbs_wq", WQ_HIGHPRI | WQ_UNBOUND, 0);
+	dbs_wq = alloc_workqueue("fusiondemand_dbs_wq", WQ_HIGHPRI | WQ_UNBOUND, 0);
 	if (!dbs_wq) {
-		printk(KERN_ERR "Failed to create ktoonservativeq_dbs_wq workqueue\n");
+		printk(KERN_ERR "Failed to create fusiondemand_dbs_wq workqueue\n");
 		return -EFAULT;
 	}
 
 	INIT_WORK(&hotplug_offline_work, hotplug_offline_work_fn);
 	INIT_WORK(&hotplug_online_work, hotplug_online_work_fn);
 	
-	return cpufreq_register_governor(&cpufreq_gov_ktoonservative);
+	return cpufreq_register_governor(&cpufreq_gov_fusiondemand);
 }
 
 static void __exit cpufreq_gov_dbs_exit(void)
 {
-	cpufreq_unregister_governor(&cpufreq_gov_ktoonservative);
+	cpufreq_unregister_governor(&cpufreq_gov_fusiondemand);
 	destroy_workqueue(dbs_wq);
 }
 
 MODULE_AUTHOR("Alexander Clouter <alex@digriz.org.uk>");
-MODULE_DESCRIPTION("'cpufreq_ktoonservativeq' - A dynamic cpufreq governor for "
+MODULE_DESCRIPTION("'cpufreq_fusiondemand' - A dynamic cpufreq governor for "
 		"Low Latency Frequency Transition capable processors "
 		"optimised for use in a battery environment");
 MODULE_LICENSE("GPL");
 
-#ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_KTOONSERVATIVEQ
+#ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_FUSIONDEMAND
 fs_initcall(cpufreq_gov_dbs_init);
 #else
 module_init(cpufreq_gov_dbs_init);
