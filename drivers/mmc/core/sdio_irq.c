@@ -119,6 +119,7 @@ static int sdio_irq_thread(void *_host)
 		ret = __mmc_claim_host(host, &host->sdio_irq_thread_abort);
 		if (ret)
 			break;
+		
 		ws = false;
 		/*
 		 * prevent suspend if it has started when scheduled;
@@ -331,4 +332,3 @@ int sdio_release_irq(struct sdio_func *func)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(sdio_release_irq);
-
