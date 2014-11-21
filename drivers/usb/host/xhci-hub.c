@@ -713,7 +713,6 @@ int xhci_hub_control(struct usb_hcd *hcd, u16 typeReq, u16 wValue,
 				xhci_dbg(xhci, "Resume USB2 port %d\n",
 					wIndex + 1);
 				bus_state->resume_done[wIndex] = 0;
-				clear_bit(wIndex, &bus_state->resuming_ports);
 				xhci_set_link_state(xhci, port_array, wIndex,
 							XDEV_U0);
 				xhci_dbg(xhci, "set port %d resume\n",
@@ -1031,12 +1030,7 @@ int xhci_hub_status_data(struct usb_hcd *hcd, char *buf)
 	/* Initial status is no changes */
 	retval = (max_ports + 8) / 8;
 	memset(buf, 0, retval);
-
-	/*
-	 * Inform the usbcore about resume-in-progress by returning
-	 * a non-zero value even if there are no status changes.
-	 */
-	status = bus_state->resuming_ports;
+	status = 0;
 
 	mask = PORT_CSC | PORT_PEC | PORT_OCC | PORT_PLC | PORT_WRC;
 
@@ -1076,11 +1070,15 @@ int xhci_bus_suspend(struct usb_hcd *hcd)
 	spin_lock_irqsave(&xhci->lock, flags);
 
 	if (hcd->self.root_hub->do_remote_wakeup) {
-		if (bus_state->resuming_ports) {
-			spin_unlock_irqrestore(&xhci->lock, flags);
-			xhci_dbg(xhci, "suspend failed because "
-						"a port is resuming\n");
-			return -EBUSY;
+		port_index = max_ports;
+		while (port_index--) {
+			if (bus_state->resume_done[port_index] != 0) {
+				spin_unlock_irqrestore(&xhci->lock, flags);
+				xhci_dbg(xhci, "suspend failed because "
+						"port %d is resuming\n",
+						port_index + 1);
+				return -EBUSY;
+			}
 		}
 	}
 
@@ -1123,8 +1121,27 @@ int xhci_bus_suspend(struct usb_hcd *hcd)
 			t2 &= ~PORT_WAKE_BITS;
 
 		t1 = xhci_port_state_to_neutral(t1);
-		if (t1 != t2)
+		if (t1 != t2) {
 			xhci_writel(xhci, t2, port_array[port_index]);
+			if (xhci->quirks & XHCI_PORTSC_DELAY)
+				ndelay(100);
+		}
+
+		if (hcd->speed != HCD_USB3) {
+			/* enable remote wake up for USB 2.0 */
+			__le32 __iomem *addr;
+			u32 tmp;
+
+			/* Add one to the port status register address to get
+			 * the port power control register address.
+			 */
+			addr = port_array[port_index] + 1;
+			tmp = xhci_readl(xhci, addr);
+			tmp |= PORT_RWE;
+			xhci_writel(xhci, tmp, addr);
+			if (xhci->quirks & XHCI_PORTSC_DELAY)
+				ndelay(100);
+		}
 	}
 	hcd->state = HC_STATE_SUSPENDED;
 	bus_state->next_statechange = jiffies + msecs_to_jiffies(10);
@@ -1201,8 +1218,27 @@ int xhci_bus_resume(struct usb_hcd *hcd)
 					xhci, port_index + 1);
 			if (slot_id)
 				xhci_ring_device(xhci, slot_id);
-		} else
+		} else {
 			xhci_writel(xhci, temp, port_array[port_index]);
+			if (xhci->quirks & XHCI_PORTSC_DELAY)
+				ndelay(100);
+		}
+
+		if (hcd->speed != HCD_USB3) {
+			/* disable remote wake up for USB 2.0 */
+			__le32 __iomem *addr;
+			u32 tmp;
+
+			/* Add one to the port status register address to get
+			 * the port power control register address.
+			 */
+			addr = port_array[port_index] + 1;
+			tmp = xhci_readl(xhci, addr);
+			tmp &= ~PORT_RWE;
+			xhci_writel(xhci, tmp, addr);
+			if (xhci->quirks & XHCI_PORTSC_DELAY)
+				ndelay(100);
+		}
 	}
 
 	(void) xhci_readl(xhci, &xhci->op_regs->command);
