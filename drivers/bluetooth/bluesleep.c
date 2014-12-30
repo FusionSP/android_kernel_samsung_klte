@@ -513,7 +513,7 @@ static int bluesleep_write_proc_lpm(struct file *file, const char *buffer,
 		BT_ERR("(bluesleep_write_proc_lpm) Unreg HCI notifier.");
 		/* HCI_DEV_UNREG */
 		bluesleep_stop();
-		bt_enabled = false;
+		//bt_enabled = false;
 		//bsi->uport = NULL;
 	} else if (b == '1') {
 		BT_ERR("(bluesleep_write_proc_lpm) Reg HCI notifier.");
@@ -527,7 +527,7 @@ static int bluesleep_write_proc_lpm(struct file *file, const char *buffer,
 	} else if (b == '2') {
 		BT_ERR("(bluesleep_write_proc_lpm) don`t control ext_wake & uart clk");
 		if(bt_enabled) {
-			bt_enabled = false;
+			//bt_enabled = false;
 			bluesleep_abnormal_stop();
 		}
 	}
