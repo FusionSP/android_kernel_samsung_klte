@@ -284,3 +284,10 @@ config MDSS_DSI_EVENT_HANDLER_PANEL
 config CLK_TUNING
 	bool "Support CLK tuning"
 	default n
+
+config FB_MSM_MDSS_KCAL_CTRL
+	depends on FB_MSM_MDSS
+	bool "MDSS color control"
+	---help---
+	  Enable sysfs for rgb/lut control for mdss-mdp display controllers
+	  in the MDSS sub-system.
