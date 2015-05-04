@@ -163,11 +163,11 @@ struct device slimbus_dev = {
 
 static void music_is_playing_fn(struct work_struct *work)
 {
-	//pr_alert("MUSIC PLAYING (FUNC) - KTOONSEZ - %d", is_music_playing);
+	//pr_alert("MUSIC PLAYING (FUNC) - FUSION - %d", is_music_playing);
 	if (is_music_playing)
 	{
 		is_music_playing_func_sent = set_music_playing_state(is_music_playing);
-		if (ktoonservative_is_active)
+		if (fusiondemand_is_active)
 			is_music_playing_func_sentkt = set_music_playing_statekt(is_music_playing);
 	}
 }
@@ -3014,12 +3014,12 @@ int slim_control_ch(struct slim_device *sb, u16 chanh,
 		slc = &ctrl->chans[chan];
 		dev_dbg(&ctrl->dev, "chan:%d,ctrl:%d,def:%d", chan, chctrl,
 					slc->def);
-		//pr_alert("KTOONSEZ MUSIC DEBUG-chan:%d,ctrl:%d,def:%d, ref:%d", slc->chan,
+		//pr_alert("FUSION MUSIC DEBUG-chan:%d,ctrl:%d,def:%d, ref:%d", slc->chan,
 		//	chctrl, slc->def, slc->ref); /* slimbus debug patch */
 		//MEDIA ON
 		if (chctrl == 0 && slc->def == 0 && slc->ref == 3)
 		{
-			pr_alert("MUSIC PLAYING (TRIG) - KTOONSEZ - %d", is_music_playing);
+			pr_alert("MUSIC PLAYING (TRIG) - FUSION - %d", is_music_playing);
 			if (!is_music_playing)
 				schedule_delayed_work_on(0, &music_is_playing, msecs_to_jiffies(10000));
 			is_music_playing = true;
@@ -3034,12 +3034,12 @@ int slim_control_ch(struct slim_device *sb, u16 chanh,
 			}
 			if (is_music_playing_func_sentkt)
 			{
-				if (ktoonservative_is_active)
+				if (fusiondemand_is_active)
 					set_music_playing_statekt(is_music_playing);
 			}
 			is_music_playing_func_sent = false;
 			is_music_playing_func_sentkt = false;
-			pr_alert("MUSIC STOPPED - KTOONSEZ");
+			pr_alert("MUSIC STOPPED - FUSION");
 		}
 		if (slc->state < SLIM_CH_DEFINED) {
 			ret = -ENOTCONN;

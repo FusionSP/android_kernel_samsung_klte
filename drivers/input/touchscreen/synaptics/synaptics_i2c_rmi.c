@@ -1860,8 +1860,8 @@ static int synaptics_rmi4_f12_abs_report(struct synaptics_rmi4_data *rmi4_data,
 	if (touch_count)
 	{
 		//pr_alert("KT TOUCH-%d - %d\n", touch_count, screen_is_off);
-		if (ktoonservative_is_active)
-			ktoonservative_boostpulse(false);
+		if (fusiondemand_is_active)
+			fusiondemand_boostpulse(false);
 		hotplugap_boostpulse();
 	}
 	

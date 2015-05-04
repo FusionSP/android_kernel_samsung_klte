@@ -137,14 +137,14 @@ config CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
             help
               Use the CPUFreq governor 'intellidemand' as default.
 
-config CPU_FREQ_DEFAULT_GOV_KTOONSERVATIVEQ
-	bool "ktoonservativeq"
-	select CPU_FREQ_GOV_KTOONSERVATIVEQ
+config CPU_FREQ_DEFAULT_GOV_FUSIONDEMAND
+	bool "fusiondemand"
+	select CPU_FREQ_GOV_FUSIONDEMAND
 	help
-	  Use the CPUFreq governor 'ktoonservativeq' as default. This allows
+	  Use the CPUFreq governor 'fusiondemand' as default. This allows
 	  you to get a full dynamic frequency capable system by simply
 	  loading your cpufreq low-level hardware driver.
-	  Be aware that not all cpufreq drivers support the ktoonservativeq
+	  Be aware that not all cpufreq drivers support the fusiondemand
 	  governor. If unsure have a look at the help section of the
 	  driver. Fallback governor will be the performance governor.  This
 	  governor adds the capability of hotpluging.
@@ -271,11 +271,11 @@ config CPU_FREQ_GOV_INTERACTIVE
 
 	  If in doubt, say N.
 
-config CPU_FREQ_GOV_KTOONSERVATIVEQ
-	tristate "'ktoonservativeq' cpufreq governor"
+config CPU_FREQ_GOV_FUSIONDEMAND
+	tristate "'fusiondemand' cpufreq governor"
 	depends on CPU_FREQ
 	help
-	  'ktoonservativeq' - this driver is rather similar to the 'ondemand'
+	  'fusiondemand' - this driver is rather similar to the 'ondemand'
 	  governor both in its source code and its purpose, the difference is
 	  its optimisation for better suitability in a battery powered
 	  environment.  The frequency is gracefully increased and decreased
@@ -289,7 +289,7 @@ config CPU_FREQ_GOV_KTOONSERVATIVEQ
 	  This governor adds the capability of hotpluging.
 
 	  To compile this driver as a module, choose M here: the
-	  module will be called cpufreq_ktoonservativeq.
+	  module will be called cpufreq_fusiondemand.
 
 	  For details, take a look at linux/Documentation/cpu-freq.
 

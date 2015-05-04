@@ -422,8 +422,8 @@ static void gpio_keys_gpio_report_event(struct gpio_button_data *bdata)
 	unsigned int type = button->type ?: EV_KEY;
 	int state = (gpio_get_value_cansleep(button->gpio) ? 1 : 0) ^ button->active_low;
 
-	if (ktoonservative_is_active && button->code == KEY_HOMEPAGE && state)
-		ktoonservative_screen_is_on(true);
+	if (fusiondemand_is_active && button->code == KEY_HOMEPAGE && state)
+		fusiondemand_screen_is_on(true);
 
 	printk(KERN_INFO "%s: %s key is %s\n",
 		__func__, button->desc, state ? "pressed" : "released");

@@ -40,13 +40,13 @@ void gkt_work_init(void)
 
 void gkt_boost_cpu_call(bool change_screen_state, bool boost_for_button)
 {
-	if (ktoonservative_is_active)
+	if (fusiondemand_is_active)
 	{
-		//pr_alert("KTGlobal WORK CALL - Ktoonservative mode\n");
+		//pr_alert("KTGlobal WORK CALL - Fusiondemand mode\n");
 		//if (change_screen_state)
-		//	ktoonservative_screen_is_on(true);
+		//	Fusiondemand_screen_is_on(true);
 		//else
-			ktoonservative_boostpulse(boost_for_button);
+			fusiondemand_boostpulse(boost_for_button);
 	}
 	else
 	{
@@ -56,4 +56,3 @@ void gkt_boost_cpu_call(bool change_screen_state, bool boost_for_button)
 		queue_work_on(0, gkt_wq, &gkt_online_work);
 	}
 }
-
